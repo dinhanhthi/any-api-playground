@@ -1,6 +1,12 @@
-# linkedin-api-playground
+# any-api-playground
 
-A playground for LinkedIn APIs.
+- LinkedIn.
+- Hugging Face.
 
-- https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow
-- https://www.youtube.com/watch?v=WhKkbpMjSks
+```bash
+# install
+npm i
+
+# use
+node -r dotenv/config hugging-face/name.js
+```
