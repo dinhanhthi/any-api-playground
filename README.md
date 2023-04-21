@@ -1,8 +1,5 @@
 # any-api-playground
 
-- LinkedIn.
-- Hugging Face.
-
 ```bash
 # install
 npm i

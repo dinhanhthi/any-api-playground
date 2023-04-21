@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dinhanhthi/any-api-playground#readme",
   "dependencies": {
+    "got": "^11.8.2",
     "node-fetch": "^3.3.1"
   }
 }
