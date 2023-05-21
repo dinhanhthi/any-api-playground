@@ -2,7 +2,7 @@
 
 ```bash
 # install
-npm i
+yarn
 
 # use
 node -r dotenv/config hugging-face/name.js
