@@ -1,7 +1,7 @@
 /**
  * How to use?
  *
- * node -r dotenv/config notion-api/udPageProperties.js
+ * node -r dotenv/config notion-api/updatePageProperties.js
  */
 
 
@@ -34,6 +34,8 @@ async function updateBookCoverProperty(notionClient, pageId, imgurUrl) {
       },
     },
   })
+
+  console.log('response: ', JSON.stringify(response))
 
   return response
 }
