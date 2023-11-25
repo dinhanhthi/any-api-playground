@@ -1,7 +1,7 @@
 /**
  * How to use?
  *
- * node -r dotenv/config openai/functionCalling.js
+ * node -r dotenv/config openai/functionCalling_v3.js
  */
 
 import { Configuration, OpenAIApi } from 'openai'
