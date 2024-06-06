@@ -17,8 +17,7 @@ async function main() {
       type: 'function',
       function: {
         name: 'get_current_weather',
-        // description: 'Get the current weather',
-        description: 'Get useful information',
+        description: 'Get the current weather',
         parameters: {
           type: 'object',
           properties: {
@@ -62,6 +61,19 @@ async function main() {
           required: ['location', 'format', 'num_days'],
         },
       },
+    },
+  ]
+
+  const messages = [
+    {
+      role: 'system',
+      content:
+        "Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous.",
+    },
+    {
+      role: 'user',
+      content:
+        'what is the weather going to be like in San Francisco and Glasgow over the next 4 days',
     },
   ]
 
@@ -142,19 +154,6 @@ async function main() {
           required: ['country'],
         },
       },
-    },
-  ]
-
-  const messages = [
-    {
-      role: 'system',
-      content:
-        "Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous.",
-    },
-    {
-      role: 'user',
-      content:
-        'what is the weather going to be like in San Francisco and Glasgow over the next 4 days',
     },
   ]
 

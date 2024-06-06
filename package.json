@@ -20,8 +20,9 @@
   "dependencies": {
     "@notionhq/client": "^2.2.5",
     "cloudinary": "^1.40.0",
+    "dotenv": "^16.4.5",
     "got": "^11.8.2",
     "node-fetch": "^3.3.1",
-    "openai": "^4.19.0"
+    "openai": "^4.48.2"
   }
 }
