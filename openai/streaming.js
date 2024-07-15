@@ -21,18 +21,20 @@ async function main() {
     stream: true,
   })
 
-  for await (const [idx, chunk] of completion) {
+  let idx = 0
+  for await (const chunk of completion) {
     // console.log(chunk.choices[0].delta.content);
-    process.stdout.write(chunk.choices[0]?.delta?.content || '') // print in one line
+    // process.stdout.write(chunk.choices[0]?.delta?.content || '') // print in one line
+
+    if (idx === 0) {
+      console.log(`👉👉👉 first chunk id: `, chunk?.id)
+    }
+    console.log('id: ', chunk.id)
+
+    idx++
   }
 
-  let firstChunk
-  for await (const chunk of completion) {
-    process.stdout.write(chunk.choices[0]?.delta?.content || '') // print in one line
-    firstChunk = chunk
-    break
-  }
-  console.log(`👉👉👉 firstChunk id: `, firstChunk?.id)
+  console.log('🥳 Done!')
 }
 
 main()
