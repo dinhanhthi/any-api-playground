@@ -7,24 +7,32 @@
  *
  */
 
-import OpenAI from "openai";
+import OpenAI from 'openai'
 
-const openai = new OpenAI();
+const openai = new OpenAI()
 
 async function main() {
   const completion = await openai.chat.completions.create({
-    model: "gpt-4o",
+    model: 'gpt-4o',
     messages: [
-      {"role": "system", "content": "You are a helpful assistant."},
-      {"role": "user", "content": "Hello!"}
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: 'Hello!' },
     ],
     stream: true,
-  });
+  })
 
-  for await (const chunk of completion) {
+  for await (const [idx, chunk] of completion) {
     // console.log(chunk.choices[0].delta.content);
-    process.stdout.write(chunk.choices[0]?.delta?.content || ""); // print in one line
+    process.stdout.write(chunk.choices[0]?.delta?.content || '') // print in one line
   }
+
+  let firstChunk
+  for await (const chunk of completion) {
+    process.stdout.write(chunk.choices[0]?.delta?.content || '') // print in one line
+    firstChunk = chunk
+    break
+  }
+  console.log(`👉👉👉 firstChunk id: `, firstChunk?.id)
 }
 
-main();
+main()
