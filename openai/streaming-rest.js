@@ -38,12 +38,42 @@ async function main() {
 
   const reader = response.body.getReader()
   const decoder = new TextDecoder()
+  let buffer = ''
   while (true) {
     const { value, done } = await reader.read()
     if (done) {
       break
     }
-    console.log(decoder.decode(value).replace(/\n/g, ''))
+    buffer += decoder.decode(value, { stream: true })
+
+    // Process each line in the buffer
+    let lines = buffer.split('\n')
+    buffer = lines.pop() // Keep the last part in buffer if it's incomplete
+
+    for (let line of lines) {
+      if (line.startsWith('data: ')) {
+        let jsonChunk = line.substring(6) // Remove the "data: " prefix
+        if (jsonChunk === '[DONE]') {
+          console.log('Stream finished.')
+          return // Exit if we encounter the [DONE] message
+        }
+        try {
+          let parsedChunk = JSON.parse(jsonChunk)
+          console.log(parsedChunk) // Log the JSON object
+        } catch (error) {
+          console.error('Failed to parse JSON chunk:', error)
+        }
+      }
+    }
+    // console.log(decoder.decode(value).replace(/\n/g, ''))
+    if (buffer) {
+      try {
+        let parsedChunk = JSON.parse(buffer)
+        console.log(parsedChunk, null, 2)
+      } catch (error) {
+        console.error('Failed to parse JSON chunk:', error)
+      }
+    }
   }
 }
 
