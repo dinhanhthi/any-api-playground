@@ -5,7 +5,6 @@
  *
  */
 
-// import got from 'got/dist/source/index.js'
 import axios from 'axios'
 
 async function main() {
@@ -23,7 +22,7 @@ async function main() {
       },
       {
         content:
-          'Count to 10, with a comma between each number and no newlines. E.g., 1, 2, 3, ...',
+          'Count to 100, with a comma between each number and no newlines. E.g., 1, 2, 3, ...',
         role: 'user',
       },
     ],
@@ -41,6 +40,7 @@ async function main() {
   }
 
   const response = await axios(config)
+  /* ###Thi */ console.log(`👉👉👉 response: `, response.data);
   const reader = response.data
   const decoder = new TextDecoder()
   let buffer = ''
