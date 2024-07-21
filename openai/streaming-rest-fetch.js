@@ -1,9 +1,7 @@
 /**
- * Copied from https://platform.openai.com/docs/api-reference/chat/create?lang=node.js
+ * How to use?
  *
- *  How to use?
- *
- * node -r dotenv/config openai/streaming-rest.js
+ * node -r dotenv/config openai/streaming-rest-fetch.js
  *
  */
 
@@ -54,26 +52,28 @@ async function main() {
       if (line.startsWith('data: ')) {
         let jsonChunk = line.substring(6) // Remove the "data: " prefix
         if (jsonChunk === '[DONE]') {
-          console.log('Stream finished.')
-          return // Exit if we encounter the [DONE] message
+          callback()
+          return
         }
         try {
-          let parsedChunk = JSON.parse(jsonChunk)
-          console.log(parsedChunk) // Log the JSON object
+          let chunk = JSON.parse(jsonChunk)
+          // console.log(chunk) // Log the JSON object
+          process.stdout.write(chunk.choices?.[0]?.delta?.content || '')
         } catch (error) {
           console.error('Failed to parse JSON chunk:', error)
         }
       }
     }
     // console.log(decoder.decode(value).replace(/\n/g, ''))
-    if (buffer) {
-      try {
-        let parsedChunk = JSON.parse(buffer)
-        console.log(parsedChunk, null, 2)
-      } catch (error) {
-        console.error('Failed to parse JSON chunk:', error)
-      }
-    }
+    // if (buffer) {
+    //   try {
+    //     let chunk = JSON.parse(buffer)
+    //     // console.log(chunk, null, 2)
+    //     process.stdout.write(chunk.choices?.[0]?.delta?.content || '')
+    //   } catch (error) {
+    //     console.error('Failed to parse JSON chunk:', error)
+    //   }
+    // }
   }
 }
 

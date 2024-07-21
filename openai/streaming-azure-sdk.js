@@ -1,5 +1,4 @@
 /**
- * Copied from https://platform.openai.com/docs/api-reference/chat/create?lang=node.js
  *
  *  How to use?
  *

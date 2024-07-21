@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/dinhanhthi/any-api-playground#readme",
   "dependencies": {
+    "@mistralai/mistralai": "^0.5.0",
     "@notionhq/client": "^2.2.5",
+    "axios": "0.21.1",
     "cloudinary": "^1.40.0",
     "dotenv": "^16.4.5",
     "got": "^11.8.2",
