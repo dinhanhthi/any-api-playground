@@ -40,7 +40,7 @@ async function main() {
   }
 
   const response = await axios(config)
-  /* ###Thi */ console.log(`👉👉👉 response: `, response.data);
+  // /* ###Thi */ console.log(`👉👉👉 response: `, response.data);
   const reader = response.data
   const decoder = new TextDecoder()
   let buffer = ''
@@ -61,6 +61,7 @@ async function main() {
         try {
           let chunk = JSON.parse(jsonChunk)
           // console.log(chunk) // Log the JSON object
+          // console.log(chunk.choices?.[0]?.delta?.content || '')
           process.stdout.write(chunk.choices?.[0]?.delta?.content || '')
         } catch (error) {
           console.error('Failed to parse JSON chunk:', error)

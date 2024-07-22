@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dinhanhthi/any-api-playground#readme",
   "dependencies": {
+    "@google/generative-ai": "^0.15.0",
     "@mistralai/mistralai": "^0.5.0",
     "@notionhq/client": "^2.2.5",
     "axios": "0.21.1",

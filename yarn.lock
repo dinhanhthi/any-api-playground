@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@google/generative-ai@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.15.0.tgz#5df2455235a59b16d874f3cfae2bcb7ed7478b6d"
+  integrity sha512-zs37judcTYFJf1U7tnuqnh7gdzF6dcWj9pNRxjA5JTONRoiQ0htrRdbefRFiewOIfXwhun5t9hbd2ray7812eQ==
+
 "@mistralai/mistralai@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@mistralai/mistralai/-/mistralai-0.5.0.tgz#7eb45e4c2af16084cb7c8daefbfe5e6d5e01131d"
