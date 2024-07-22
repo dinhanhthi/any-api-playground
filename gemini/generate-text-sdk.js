@@ -23,16 +23,43 @@ async function main() {
       category: HarmCategory.HARM_CATEGORY_HARASSMENT,
       threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
     },
-  ];
+  ]
 
   const systemInstruction = 'You are a helpful assistant.'
 
-  // We can put all settings inside generateContent() instead
-  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash', generationConfig, safetySettings, systemInstruction })
-
   const prompt = 'Hello, who are you?'
 
-  const result = await model.generateContent(prompt)
+  // --- 1st way ---
+
+  // const model = genAI.getGenerativeModel({
+  //   model: 'gemini-1.5-flash',
+  //   generationConfig,
+  //   safetySettings,
+  //   systemInstruction,
+  // })
+  // const result = await model.generateContent(prompt)
+
+  // --- 2nd way ---
+
+  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+  const result = await model.generateContent({
+    generationConfig,
+    safetySettings,
+    systemInstruction,
+    contents: [
+      {
+        role: 'user',
+        parts: [
+          {
+            text: prompt,
+          },
+        ],
+      },
+    ],
+  })
+
+  // -- result --
+
   const response = await result.response
   const text = response.text()
   console.log(text)

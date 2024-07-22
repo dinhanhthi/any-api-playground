@@ -43,16 +43,6 @@ async function main() {
     generationConfig,
     safetySettings,
     systemInstruction: 'You are a helpful assistant with name AAAAA.',
-    // contents: [
-    //   {
-    //     role: 'user',
-    //     parts: [
-    //       {
-    //         text: 'Who are you?',
-    //       },
-    //     ],
-    //   },
-    // ],
     contents: [
       {
         role: 'user',
@@ -80,7 +70,7 @@ async function main() {
       },
     ],
   })
-  const response = await result.response
+  const response = result.response
   console.log(JSON.stringify(response, null, 2))
   // const text = response.text()
   // console.log(text)

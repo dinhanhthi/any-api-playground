@@ -95,21 +95,48 @@ async function main() {
     },
   ]
 
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-1.5-flash',
+  const prompt =
+    'Hello, my name is Anh-Thi Dinh (first name is Thi, last name is Dinh). My email is "thi@ideta.io". I\'m from Vietnam and my phone number is 4242424242. I want to talk to an agent about an error on your platform.'
+
+  // --- 1st way ---
+
+  // const model = genAI.getGenerativeModel({
+  //   model: 'gemini-1.5-flash',
+  //   generationConfig,
+  //   safetySettings,
+  //   systemInstruction,
+  //   tools: {
+  //     functionDeclarations,
+  //   },
+  // })
+
+  // const result = await model.generateContent(prompt)
+
+  // --- 2nd way ---
+  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+
+  const result = await model.generateContent({
     generationConfig,
     safetySettings,
     systemInstruction,
     tools: {
       functionDeclarations,
     },
+    contents: [
+      {
+        role: 'user',
+        parts: [
+          {
+            text: prompt,
+          },
+        ],
+      },
+    ],
   })
 
-  const prompt =
-    'Hello, my name is Anh-Thi Dinh (first name is Thi, last name is Dinh). My email is "thi@ideta.io". I\'m from Vietnam and my phone number is 4242424242. I want to talk to an agent about an error on your platform.'
+  // -- result --
 
-  const result = await model.generateContent(prompt)
-  const response = await result.response
+  const response = result.response
   console.log(JSON.stringify(response, null, 2))
 
   // const text = response.text()
