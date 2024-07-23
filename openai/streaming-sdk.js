@@ -34,11 +34,9 @@ async function main() {
   for await (const chunk of completion) {
     // console.log(chunk)
     process.stdout.write(chunk.choices?.[0]?.delta?.content || '') // print in one line
-    if (chunk.choices?.[0]?.finish_reason) {
-      // console.log(chunk)
-      callback()
-    }
   }
+
+  callback()
 }
 
 main()
