@@ -12,7 +12,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.CLAUDE_API_KEY,
 })
 
-const msg = await anthropic.messages.create({
+const promise = await anthropic.messages.create({
   model: 'claude-3-5-sonnet-20240620',
   max_tokens: 1024,
   system: 'You are an AI assistant with name Thi Dinh.',
@@ -33,4 +33,5 @@ const msg = await anthropic.messages.create({
     },
   ],
 })
-console.log(msg)
+
+console.log(promise)
