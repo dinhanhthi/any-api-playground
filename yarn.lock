@@ -21,12 +21,10 @@
   resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.15.0.tgz#5df2455235a59b16d874f3cfae2bcb7ed7478b6d"
   integrity sha512-zs37judcTYFJf1U7tnuqnh7gdzF6dcWj9pNRxjA5JTONRoiQ0htrRdbefRFiewOIfXwhun5t9hbd2ray7812eQ==
 
-"@mistralai/mistralai@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@mistralai/mistralai/-/mistralai-0.5.0.tgz#7eb45e4c2af16084cb7c8daefbfe5e6d5e01131d"
-  integrity sha512-56xfoC/0CiT0RFHrRNoJYSKCNc922EyHzEPJYY6ttalQ5KZdrNVgXeOetIGX0lDx7IjbxAJrrae2MQgUIlL9+g==
-  dependencies:
-    node-fetch "^2.6.7"
+"@mistralai/mistralai@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@mistralai/mistralai/-/mistralai-1.0.1.tgz#c71bfecc863ace6654b61af0c0f591325b107b72"
+  integrity sha512-4q42rrFF3voHb/vicYewtIhxilkEm4pYrau/jDw3a7yNj8RsryB+XYNHpz0P97kUZPM6rbwJdNK6S8y7nfR9GQ==
 
 "@notionhq/client@^2.2.5":
   version "2.2.5"
@@ -363,7 +361,7 @@ node-fetch@^2.6.1:
 
 node-fetch@^2.6.7:
   version "2.7.0"
-  resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
@@ -440,7 +438,7 @@ responselike@^2.0.0:
 
 tr46@~0.0.3:
   version "0.0.3"
-  resolved "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
 
 undici-types@~5.26.4:
@@ -460,12 +458,12 @@ web-streams-polyfill@^3.0.3, web-streams-polyfill@^3.2.1:
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
-  resolved "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
   integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
 
 whatwg-url@^5.0.0:
   version "5.0.0"
-  resolved "https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
   integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
   dependencies:
     tr46 "~0.0.3"
@@ -475,3 +473,8 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz"
   integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
+
+zod@^3.23.8:
+  version "3.23.8"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.8.tgz#e37b957b5d52079769fb8097099b592f0ef4067d"
+  integrity sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==
