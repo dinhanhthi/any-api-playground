@@ -27,7 +27,8 @@ const anthropic = new Anthropic({
 
 // 2nd way
 const stream = await anthropic.messages.create({
-  model: 'claude-3-5-sonnet-20240620',
+  // model: 'claude-3-5-sonnet-20240620',
+  model: 'claude-3-haiku-20240307',
   max_tokens: 1024,
   system: 'You are an AI assistant with name Thi Dinh.',
   messages: [
