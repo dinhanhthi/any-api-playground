@@ -42,20 +42,26 @@ async function main() {
   // --- 2nd way ---
 
   const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
+  const contents = [
+    { role: 'user', parts: [ { text: 'My name is Thi. Who are you?' } ] },
+    { role: 'model', parts: [ { text: 'I am an AI assistant. How can I help you?' } ] },
+    { role: 'user', parts: [ { text: 'Do you remember my name?' } ] },
+  ]
   const result = await model.generateContent({
     generationConfig,
     safetySettings,
     systemInstruction,
-    contents: [
-      {
-        role: 'user',
-        parts: [
-          {
-            text: prompt,
-          },
-        ],
-      },
-    ],
+    // contents: [
+    //   {
+    //     role: 'user',
+    //     parts: [
+    //       {
+    //         text: prompt,
+    //       },
+    //     ],
+    //   },
+    // ],
+    contents: contents
   })
 
   // -- result --
