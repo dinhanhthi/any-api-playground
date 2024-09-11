@@ -24,8 +24,8 @@ async function run() {
     ],
   })
 
-  for await (const event of result) {
-    process.stdout.write(event?.data?.choices?.[0]?.delta?.content)
+  for await (const chunk of result) {
+    process.stdout.write(chunk?.data?.choices?.[0]?.delta?.content)
   }
 }
 
