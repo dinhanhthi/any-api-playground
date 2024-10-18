@@ -1,4 +1,4 @@
-# any-api-playground
+# 🤪 any-api-playground
 
 ```bash
 # install
