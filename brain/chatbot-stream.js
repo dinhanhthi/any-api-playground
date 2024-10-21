@@ -51,9 +51,9 @@ async function main() {
   })
 
   reader.on('end', () => {
-    if (buffer) {
-      /* ###Thi */ console.log(`👉👉👉 end buffer: `, buffer);
-    }
+    // if (buffer) {
+    //   /* ###Thi */ console.log(`👉👉👉 end buffer: `, buffer);
+    // }
     console.log('Stream ended.')
   })
 
@@ -65,7 +65,7 @@ async function main() {
 main()
 
 async function getToken() {
-  let form = new FormData()
+  const form = new FormData()
   form.append('softlaw_client_id', process.env.BRAIN_SOFTLAW_CLIENT_ID)
   form.append('external_user_id', process.env.BRAIN_EXTERNAL_USER_ID)
   form.append('client_id', process.env.BRAIN_CLIENT_ID)
