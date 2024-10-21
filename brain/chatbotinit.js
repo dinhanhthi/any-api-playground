@@ -12,16 +12,16 @@ async function main() {
     // const token = await getToken()
     // console.log(token)
 
-    const res = await init(token)
-    console.log('Response:', JSON.stringify(res))
+    const res = await init(token).catch(retryAfterDelay(init, token))
+    console.log('Response (main):', JSON.stringify(res))
   } catch (error) {
-    // console.error('Error:', error)
-    if (error.status === 401) {
-      console.error('Unauthorized. Try again...')
-      token = await getToken()
-      const res = await init(token)
-      console.log('Response:', JSON.stringify(res))
-    }
+    console.error('Error:', error)
+    // if (error.status === 401) {
+    //   console.error('Unauthorized. Try again...')
+    //   token = await getToken()
+    //   const res = await init(token)
+    //   console.log('Response:', JSON.stringify(res))
+    // }
   }
 }
 
@@ -37,6 +37,15 @@ async function init(token) {
 }
 
 main()
+
+function retryAfterDelay(promiseFn, ...args) {
+  return error => {
+    if (error.status === 401) {
+      return new Promise(resolve => promiseFn.apply(this, args))
+    }
+    throw error
+  }
+}
 
 async function getToken() {
   let form = new FormData()
