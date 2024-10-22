@@ -6,16 +6,19 @@
 import axios from 'axios'
 import FormData from 'form-data'
 
+let token = ''
+
 async function main() {
-  let token = 'abc'
+  token = 'abc'
   try {
     // const token = await getToken()
     // console.log(token)
 
-    const res = await init(token).catch(retryAfterDelay(init, token))
+    const res = await init(token).catch(retryAfterDelay(init))
     console.log('Response (main):', JSON.stringify(res))
   } catch (error) {
-    console.error('Error:', error)
+    /* ###Thi */ console.log(`👉👉👉 error status: `, error.status)
+    // console.error('Error:', error)
     // if (error.status === 401) {
     //   console.error('Unauthorized. Try again...')
     //   token = await getToken()
@@ -38,10 +41,15 @@ async function init(token) {
 
 main()
 
-function retryAfterDelay(promiseFn, ...args) {
+async function retryAfterDelay(promiseFn, ...args) {
+  /* ###Thi */ console.log(`👉👉👉 retryAfterDelay() called`)
+  const token = await getToken()
+  // /* ###Thi */ console.log(`👉👉👉 new token: `, token);
   return error => {
+    /* ###Thi */ console.log(`👉👉👉 err inside retry: `, error);
     if (error.status === 401) {
-      return new Promise(resolve => promiseFn.apply(this, args))
+      /* ###Thi */ console.log(`👉👉👉 error 401 inside retry`);
+      return new Promise(resolve => resolve(promiseFn.apply(this, token)))
     }
     throw error
   }

@@ -43,17 +43,14 @@ async function main() {
 
   const response = await axios.request(config)
   const reader = response.data
-  const decoder = new TextDecoder()
-  let buffer = ''
   reader.on('data', chunk => {
-    buffer += decoder.decode(chunk, { stream: true })
-    process.stdout.write(chunk || '')
+    const decoder = new TextDecoder('utf-8');
+    const text = decoder.decode(chunk);
+    process.stdout.write(text)
+    // process.stdout.write(chunk || '')
   })
 
   reader.on('end', () => {
-    // if (buffer) {
-    //   /* ###Thi */ console.log(`👉👉👉 end buffer: `, buffer);
-    // }
     console.log('Stream ended.')
   })
 
