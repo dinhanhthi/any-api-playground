@@ -1,5 +1,6 @@
 /**
  * https://github.com/mistralai/client-js
+ * https://github.com/mistralai/client-ts
  *
  * node -r dotenv/config mistral/chat-sdk.js
  */

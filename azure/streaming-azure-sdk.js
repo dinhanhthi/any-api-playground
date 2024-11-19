@@ -2,7 +2,7 @@
  *
  *  How to use?
  *
- * node -r dotenv/config openai/streaming-azure-sdk.js
+ * node -r dotenv/config azure/streaming-azure-sdk.js
  *
  */
 

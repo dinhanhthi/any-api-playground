@@ -3,7 +3,7 @@
  *
  * How to use?
  *
- * node -r dotenv/config openai/azure.js
+ * node -r dotenv/config azure/azure.js
  */
 
 import { AzureOpenAI } from 'openai'
