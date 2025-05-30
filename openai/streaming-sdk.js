@@ -1,9 +1,6 @@
 /**
- *
  * How to use?
- *
  * node -r dotenv/config openai/streaming-sdk.js
- *
  */
 
 import OpenAI from 'openai'
@@ -23,16 +20,17 @@ async function main() {
   // }
 
   const body = {
-    model: 'o1-mini',
-    max_completion_tokens: 200,
+    // model: 'o1-mini',
+    model: 'o1',
+    // max_completion_tokens: 200,
     messages: [
+      // {
+      //   role: 'user',
+      //   content: 'You are a useful assistant from Ideta.',
+      // },
       {
         role: 'user',
-        content: 'You are a useful assistant from Ideta.',
-      },
-      {
-        role: 'user',
-        content: 'hello',
+        content: 'who are you?',
       },
     ],
   }
