@@ -2,7 +2,7 @@
  * From: https://ai.google.dev/gemini-api/docs/function-calling/tutorial?lang=node
  *
  * How to use?
- * node -r dotenv/config gemini/function-calling.js
+ * node -r dotenv/config gemini/old_sdk/function-calling-2nd-call.js
  *
  */
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai'

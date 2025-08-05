@@ -31,14 +31,17 @@ async function main() {
     // stream: true
   }
 
-  const completion = await client.chat.completions.create(body)
-  const callback = () => {
-    console.log('\n🎉 Callback called!')
-  }
+  // const completion = await client.chat.completions.create(body)
+  // const callback = () => {
+  //   console.log('\n🎉 Callback called!')
+  // }
 
-  /* ###Thi */ console.log(`👉👉👉 completion: ${JSON.stringify(completion, null, 2)}`);
+  // /* ###Thi */ console.log(`👉👉👉 completion: ${JSON.stringify(completion, null, 2)}`);
 
-  callback()
+  // callback()
+
+  const model = await client.models.retrieve('grok-3')
+  console.log(`👉👉👉 model: ${JSON.stringify(model, null, 2)}`)
 }
 
 main()
