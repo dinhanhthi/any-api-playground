@@ -1,6 +1,6 @@
 /**
  * How to use?
- * node -r dotenv/config gemini/models.js
+ * node -r dotenv/config gemini/old_sdk/models.js
  */
 
 import { GoogleGenerativeAI } from '@google/generative-ai'

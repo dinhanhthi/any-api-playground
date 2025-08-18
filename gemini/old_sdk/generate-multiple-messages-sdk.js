@@ -2,7 +2,7 @@
  * From: https://ai.google.dev/gemini-api/docs/text-generation?lang=node#configure
  *
  * How to use?
- * node -r dotenv/config gemini/generate-multiple-messages-sdk.js
+ * node -r dotenv/config gemini/old_sdk/generate-multiple-messages-sdk.js
  *
  */
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai'

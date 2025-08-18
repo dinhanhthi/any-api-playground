@@ -2,7 +2,7 @@
  * Ref: https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=node#streaming
  *
  * How to use?
- * node -r dotenv/config gemini/streaming-sdk.js
+ * node -r dotenv/config gemini/old_sdk/streaming-sdk.js
  *
  */
 

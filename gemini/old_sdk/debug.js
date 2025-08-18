@@ -2,7 +2,7 @@
  * From: https://ai.google.dev/gemini-api/docs/text-generation?lang=node#configure
  *
  * How to use?
- * node -r dotenv/config gemini/debug.js
+ * node -r dotenv/config gemini/old_sdk/debug.js
  *
  */
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai'

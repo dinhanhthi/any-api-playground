@@ -2,7 +2,7 @@
  * From: https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=node#generate-text-from-text-input
  *
  * How to use?
- * node -r dotenv/config gemini/generate-text-sdk.js
+ * node -r dotenv/config gemini/old_sdk/generate-text-sdk.js
  *
  */
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai'
