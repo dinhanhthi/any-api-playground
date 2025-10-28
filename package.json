@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/dinhanhthi/any-api-playground#readme",
   "dependencies": {
-    "@ai-sdk/openai": "^2.0.4",
+    "@ai-sdk/openai": "^2.0.52",
     "@anthropic-ai/sdk": "^0.24.3",
     "@google/genai": "^1.12.0",
     "@google/generative-ai": "^0.15.0",
     "@mistralai/mistralai": "^1.0.4",
     "@notionhq/client": "^2.2.5",
-    "ai": "^5.0.5",
+    "ai": "^5.0.73",
     "axios": "1.7.7",
     "cloudinary": "^1.40.0",
     "dotenv": "^16.4.5",
@@ -34,10 +34,9 @@
     "node-fetch": "^3.3.1",
     "openai": "4.70.3",
     "tsx": "^4.20.3",
-    "zod": "^4.0.15"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/memjs": "^1.3.3"
-  },
-  "packageManager": "yarn@4.9.2"
+  }
 }

@@ -1,28 +1,39 @@
 /**
- * Ref: https://ai-sdk.dev/docs/getting-started/nodejs
+ * Function calling example using plain JSON Schema (without Zod)
+ * Ref: https://ai-sdk.dev/docs/reference/ai-sdk-core/json-schema
  *
  * How to run:
- * bun run ai-sdk/fc.ts
+ * bun run ai-sdk/fc-json-schema.ts
  */
 
-import { z } from 'zod'
 import { openai } from '@ai-sdk/openai'
-import { generateText, tool } from 'ai'
+import { generateText, jsonSchema } from 'ai'
 import { inspect } from 'node:util'
 
+// Define the schema using plain JSON Schema
+const weatherToolSchema = jsonSchema<{ location: string }>({
+  type: 'object',
+  properties: {
+    location: {
+      type: 'string',
+      description: 'The location to get the weather for',
+    },
+  },
+  required: ['location'],
+})
+
 const result = await generateText({
-  model: openai('gpt-5'),
+  model: openai('gpt-4o'),
   tools: {
-    weather: tool({
+    weather: {
       description: 'Get the weather in a location',
-      inputSchema: z.object({
-        location: z.string().describe('The location to get the weather for'),
-      }),
+      inputSchema: weatherToolSchema,
+      // Uncomment to execute the tool
       // execute: async ({ location }) => ({
       //   location,
       //   temperature: 72 + Math.floor(Math.random() * 21) - 10,
       // }),
-    }),
+    },
   },
   prompt: 'What is the weather in San Francisco?',
 })

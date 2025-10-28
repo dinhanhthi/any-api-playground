@@ -1,9 +1,12 @@
 /**
  * Ref: https://ai-sdk.dev/docs/getting-started/nodejs
- * 
+ *
  * How to run:
  * bun run ai-sdk/first-test.ts
  */
+
+// Disable AI SDK warnings
+(globalThis as any).AI_SDK_LOG_WARNINGS = false;
 
 import { openai } from '@ai-sdk/openai';
 import { ModelMessage, streamText } from 'ai';
@@ -24,7 +27,8 @@ async function main() {
     messages.push({ role: 'user', content: userInput });
 
     const result = streamText({
-      model: openai('gpt-4o'),
+      model: openai('gpt-5'),
+      temperature: 0.5,
       messages,
     });
 
@@ -32,11 +36,12 @@ async function main() {
     process.stdout.write('\nAssistant: ');
     for await (const delta of result.textStream) {
       fullResponse += delta;
-      process.stdout.write(delta);
+      console.log(delta);
+      // process.stdout.write(delta);
     }
-    process.stdout.write('\n\n');
+    // process.stdout.write('\n\n');
 
-    messages.push({ role: 'assistant', content: fullResponse });
+    // messages.push({ role: 'assistant', content: fullResponse });
   }
 }
 
