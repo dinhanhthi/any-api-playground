@@ -24,6 +24,8 @@ const weatherToolSchema = jsonSchema<{ location: string }>({
 
 const result = await generateText({
   model: openai('gpt-4o'),
+  // system: 'Your name is XXXThi',
+  // prompt: 'What is the weather in San Francisco?',
   tools: {
     weather: {
       description: 'Get the weather in a location',
@@ -35,7 +37,12 @@ const result = await generateText({
       // }),
     },
   },
-  prompt: 'What is the weather in San Francisco?',
+  messages: [
+    {
+      role: 'user',
+      content: 'What is the weather in San Francisco?'
+    }
+  ]
 })
 
 // Return only the result of tools/messages

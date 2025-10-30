@@ -4,6 +4,7 @@
  */
 
 import OpenAI from 'openai'
+import { inspect } from 'util'
 
 async function main() {
   // const body = {
@@ -21,7 +22,7 @@ async function main() {
 
   const body = {
     // model: 'o1-mini',
-    model: 'o1',
+    model: 'gpt-4o-mini',
     // max_completion_tokens: 200,
     messages: [
       // {
@@ -33,6 +34,7 @@ async function main() {
         content: 'who are you?',
       },
     ],
+    stream: true,
   }
 
   const client = new OpenAI({
@@ -44,12 +46,13 @@ async function main() {
     console.log('\n🎉 Callback called!')
   }
 
-  /* ###Thi */ console.log(`👉👉👉 completion: ${JSON.stringify(completion, null, 2)}`);
+  // /* ###Thi */ console.log(`👉👉👉 completion: ${JSON.stringify(completion, null, 2)}`);
 
-  // for await (const chunk of completion) {
-  //   // console.log(chunk)
-  //   process.stdout.write(chunk.choices?.[0]?.delta?.content || '') // print in one line
-  // }
+  for await (const chunk of completion) {
+    console.log(inspect(chunk, { depth: null }))
+    // process.stdout.write(chunk.choices?.[0]?.delta?.content || '') // print in one line
+
+  }
 
   callback()
 }
