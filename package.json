@@ -17,7 +17,13 @@
     "url": "https://github.com/dinhanhthi/any-api-playground/issues"
   },
   "homepage": "https://github.com/dinhanhthi/any-api-playground#readme",
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.26",
     "@ai-sdk/openai": "^2.0.52",
     "@anthropic-ai/sdk": "^0.24.3",
     "@google/genai": "^1.12.0",

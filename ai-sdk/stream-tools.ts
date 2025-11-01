@@ -2,7 +2,7 @@
  * Ref: https://ai-sdk.dev/docs/getting-started/nodejs
  *
  * How to run:
- * bun run ai-sdk/stream-tools.ts
+ * pnpm exec tsx ai-sdk/stream-tools.ts
  * node -r dotenv/config ai-sdk/stream-tools.ts
  */
 

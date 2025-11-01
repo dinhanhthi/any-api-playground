@@ -3,9 +3,10 @@
  * Ref: https://ai-sdk.dev/docs/reference/ai-sdk-core/json-schema
  *
  * How to run:
- * bun run ai-sdk/fc-json-schema.ts
+ * pnpm exec tsx ai-sdk/fc-json-schema.ts
  */
 
+import 'dotenv/config'
 import { openai } from '@ai-sdk/openai'
 import { generateText, jsonSchema } from 'ai'
 import { inspect } from 'node:util'

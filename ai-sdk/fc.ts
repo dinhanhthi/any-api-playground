@@ -2,9 +2,10 @@
  * Ref: https://ai-sdk.dev/docs/getting-started/nodejs
  *
  * How to run:
- * bun run ai-sdk/fc.ts
+ * pnpm exec tsx ai-sdk/fc.ts
  */
 
+import 'dotenv/config'
 import { z } from 'zod'
 import { openai } from '@ai-sdk/openai'
 import { generateText, tool } from 'ai'

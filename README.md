@@ -1,25 +1,33 @@
 # 🤪 any-api-playground
 
-```bash
-# install
-npm install
+## Installation
 
-# use
+Install [pnpm](https://pnpm.io/) if you haven't already:
+
+```bash
+npm install -g pnpm
+# or
+brew install pnpm
+# or
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+Install dependencies:
+
+```bash
+pnpm install
+```
+
+## Usage
+
+Run JavaScript files:
+
+```bash
 node -r dotenv/config hugging-face/name.js
 ```
 
-Using [Bun](https://bun.com/)
+Run TypeScript files:
 
 ```bash
-# install
-brew install oven-sh/bun/bun
-
-# or
-curl -fsSL https://bun.com/install | bash
-```
-
-Run `.ts` file with
-
-```bash
-bun run myfile.ts
+pnpm exec tsx myfile.ts
 ```

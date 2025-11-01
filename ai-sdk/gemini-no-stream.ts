@@ -2,15 +2,21 @@
  * Ref: https://ai-sdk.dev/docs/reference/ai-sdk-core/generate-text
  *
  * How to run:
- * pnpm exec tsx ai-sdk/non-stream.ts
+ * pnpm exec tsx ai-sdk/gemini-no-stream.ts
  */
 
 import 'dotenv/config'
 import { createOpenAI } from '@ai-sdk/openai'
+import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import { generateText } from 'ai'
-import { convertOpenAIMessagesToModelMessages, convertToAISdkTools } from './utils'
+import { convertToAISdkTools } from './utils'
 
-const model = createOpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const service = 'google'
+
+const model =
+  service === 'google'
+    ? createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY })
+    : createOpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 const extractFunctions = [
   {
@@ -65,61 +71,63 @@ const extractFunctions = [
   },
 ]
 
-// Original messages in OpenAI format
-const openAIMessages = [
+const messages = [
   {
+    role: 'user',
     content:
       "Hello, my name is Oliver Dinh (first name is Oliver, last name is Dinh). My email is harrypotter@ideta.io. I'm from Vietnam and my phone number is 4242424242. I want to talk to an agent about an error on your platform.",
-    role: 'user',
   },
   {
-    role: 'assistant',
-    tool_calls: [
+    content: [
       {
-        function: {
-          arguments: '{"firstName":"Oliver","lastName":"Dinh","email":"harrypotter@ideta.io"}',
-          name: 'Nj9Yn8D7ovTLtoAZGqY',
+        input: {
+          email: 'harrypotter@ideta.io',
+          firstName: 'Oliver',
+          lastName: 'Dinh',
         },
-        id: 'call_VxvqEf37m6y8gmQ2IcSW1Otv',
-        type: 'function',
+        toolCallId: 'Nj9Yn8D7ovTLtoAZGqY-1',
+        toolName: 'Nj9Yn8D7ovTLtoAZGqY',
+        type: 'tool-call',
       },
     ],
+    role: 'assistant',
   },
   {
+    content: [
+      {
+        output: {
+          type: 'text',
+          value: 'Some data was displayed to the user',
+        },
+        toolCallId: 'Nj9Yn8D7ovTLtoAZGqY-1',
+        toolName: 'Nj9Yn8D7ovTLtoAZGqY',
+        type: 'tool-result',
+      },
+    ],
     role: 'tool',
-    tool_call_id: 'call_VxvqEf37m6y8gmQ2IcSW1Otv',
-    name: 'Nj9Yn8D7ovTLtoAZGqY',
-    content: 'Some data was displayed to the user',
   },
   {
     role: 'user',
     content: 'who are you?',
   },
+  {
+    content: 'I am a virtual assistant for IDETA.',
+    role: 'assistant',
+  },
+  {
+    role: 'user',
+    content: 'What did I ask you so far?',
+  }
 ]
 
 const request: any = {
-  model: model('gpt-4o'),
+  model: model('gemini-2.5-flash'),
   system: 'You are an AI Assistant from Ideta. Your name is GPT Ideta.',
-  messages: convertOpenAIMessagesToModelMessages(openAIMessages),
-  // temperature: 0.1,
+  messages,
+  temperature: 0.1,
   tools: convertToAISdkTools(extractFunctions),
 }
 
-// Demo: Show the conversion
-console.log('=== BEFORE CONVERSION (OpenAI format) ===')
-console.log(JSON.stringify(openAIMessages[1], null, 2)) // Assistant with tool_calls
-console.log(JSON.stringify(openAIMessages[2], null, 2)) // Tool result
-
-console.log('\n=== AFTER CONVERSION (AI SDK ModelMessage format) ===')
-const convertedMessages = convertOpenAIMessagesToModelMessages(openAIMessages)
-console.log(JSON.stringify(convertedMessages[1], null, 2)) // Assistant with tool-call
-console.log(JSON.stringify(convertedMessages[2], null, 2)) // Tool result
-
-console.log('\n=== GENERATING TEXT ===')
 const result = await generateText(request)
-
-console.log('\n👉👉👉 result.text')
-console.log(JSON.stringify(result.text, null, 2))
-
-console.log('\n👉👉👉 result.toolCalls')
-console.log(JSON.stringify(result.toolCalls, null, 2))
+// console.log(JSON.stringify(result, null, 2))
+console.log(`result.text: ${result.text}`)
