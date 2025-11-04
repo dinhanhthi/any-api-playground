@@ -23,7 +23,10 @@
     "pnpm": ">=8.0.0"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^2.0.40",
+    "@ai-sdk/azure": "^2.0.60",
     "@ai-sdk/google": "^2.0.26",
+    "@ai-sdk/mistral": "^2.0.22",
     "@ai-sdk/openai": "^2.0.52",
     "@anthropic-ai/sdk": "^0.24.3",
     "@google/genai": "^1.12.0",
