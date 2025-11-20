@@ -99,6 +99,7 @@ async function main() {
     // process.stdout.write(delta)
     console.log(inspect(delta, { depth: null }))
   }
+  console.log('🔧 Full Text (delta):', fullText)
   process.stdout.write('\n\n')
 
   // IMPORTANT: After consuming textStream, we need to await the individual promises
