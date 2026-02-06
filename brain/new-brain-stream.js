@@ -13,7 +13,7 @@ async function main() {
 
   const data = {
     model: 'mistral-small-24b',
-    messages: [{ role: 'user', content: 'Count from 1 to 50' }],
+    messages: [{ role: 'user', content: 'who are you?' }],
     stream: true,
   }
 

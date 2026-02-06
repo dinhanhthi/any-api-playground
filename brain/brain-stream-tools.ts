@@ -8,8 +8,8 @@
 
 import axios from 'axios'
 import FormData from 'form-data'
-import { inspect } from 'util'
 import 'dotenv/config'
+import { inspect } from 'util'
 
 interface ToolCall {
   index: number
@@ -108,12 +108,29 @@ async function main() {
     {
       role: 'user',
       content:
-        // "Hello, my name is Oliver Dinh (first name is Oliver, last name is Dinh). My email is harrypotter@ideta.io. I'm from Vietnam and my phone number is 4242424242.",
-        "count from 1 to 50?"
+        "Hello, my name is Oliver Dinh (first name is Oliver, last name is Dinh). My email is harrypotter@ideta.io. I'm from Vietnam and my phone number is 4242424242.",
+        // "who are you?"
     },
   ]
 
   console.log('=== BRAIN API STREAMING WITH TOOLS ===\n')
+
+  // Callback function to be called when stream completes
+  const onStreamComplete = (data: { fullText: string; toolCalls: ToolCall[]; finishReason: string | null }) => {
+    console.log('\n\n📊 Stream Complete Callback!')
+    console.log('Finish Reason:', data.finishReason || 'unknown')
+    console.log('Full Text:', data.fullText || '(no text)')
+    console.log('Tool Calls:', data.toolCalls.length)
+
+    if (data.toolCalls.length > 0) {
+      console.log('\nTool Call Details:')
+      data.toolCalls.forEach((tc, idx) => {
+        console.log(`\n  ${idx + 1}. ${tc.function.name}`)
+        console.log(`     ID: ${tc.id}`)
+        console.log(`     Arguments: ${tc.function.arguments || '(empty)'}`)
+      })
+    }
+  }
 
   const data = {
     model: 'mistral-small-24b',
@@ -147,35 +164,37 @@ async function main() {
   reader.on('data', (chunk: Buffer) => {
     buffer += decoder.decode(chunk, { stream: true })
     let lines = buffer.split('\n')
+    // /* ###Thi */ console.log(`👉👉👉 lines: ${inspect(lines, { depth: null, colors: true })}`);
     buffer = lines.pop() || '' // Keep the last part in buffer if it's incomplete
 
     for (let line of lines) {
-      // Debug: log all lines
-      if (process.env.DEBUG && line.trim()) {
-        console.log('[DEBUG] Raw line:', line)
-      }
-
+      // /* ###Thi */ console.log(`👉👉👉 line: ${inspect(line, { depth: null, colors: true })}`);
       if (line.startsWith('data: ')) {
         let jsonChunk = line.substring(6) // Remove the "data: " prefix
 
         if (jsonChunk === '[DONE]') {
-          console.log('\n\n🎉 Stream completed!')
+          console.log('\n\n🎉 Stream completed with [DONE] marker!')
+
+          // Call the completion callback
+          onStreamComplete({
+            fullText,
+            toolCalls: Array.from(toolCalls.values()),
+            finishReason,
+          })
+
+          reader.destroy() // Close the stream
           return
         }
 
         try {
           const parsedChunk = JSON.parse(jsonChunk)
           const delta = parsedChunk.choices?.[0]?.delta
-          const choice = parsedChunk.choices?.[0]
+          const chunkFinishReason = parsedChunk.choices?.[0]?.finish_reason
 
-          // Debug: log the entire chunk
-          if (process.env.DEBUG) {
-            console.log('\n[DEBUG] Chunk:', inspect(parsedChunk, { depth: null, colors: true }))
-          }
-
-          // Capture finish reason
-          if (choice?.finish_reason) {
-            finishReason = choice.finish_reason
+          // Capture finish_reason
+          if (chunkFinishReason) {
+            finishReason = chunkFinishReason
+            console.log(`\n[Stream finished: ${chunkFinishReason}]`)
           }
 
           // Handle text content
@@ -223,40 +242,18 @@ async function main() {
   })
 
   return new Promise<void>((resolve, reject) => {
-    // reader.on('end', () => {
-    //   console.log('\n\n📊 Final Results:\n')
+    reader.on('end', () => {
+      console.log('\n[Stream ended by server]')
 
-    //   console.log('🔧 Finish Reason:', finishReason || 'unknown')
+      // Call the completion callback with accumulated data
+      onStreamComplete({
+        fullText,
+        toolCalls: Array.from(toolCalls.values()),
+        finishReason,
+      })
 
-    //   console.log('\n🔧 Full Text:')
-    //   console.log(fullText || '(no text content)')
-
-    //   console.log('\n🔧 Tool Calls:')
-    //   if (toolCalls.size > 0) {
-    //     const toolCallsArray = Array.from(toolCalls.values()).map(tc => {
-    //       let parsedArguments: any
-    //       try {
-    //         // Only parse if arguments is not empty
-    //         parsedArguments = tc.function.arguments ? JSON.parse(tc.function.arguments) : {}
-    //       } catch (error) {
-    //         console.error(`Failed to parse arguments for ${tc.function.name}:`, tc.function.arguments)
-    //         parsedArguments = tc.function.arguments // Keep as string if parsing fails
-    //       }
-    //       return {
-    //         ...tc,
-    //         function: {
-    //           ...tc.function,
-    //           arguments: parsedArguments,
-    //         },
-    //       }
-    //     })
-    //     console.log(inspect(toolCallsArray, { depth: null, colors: true }))
-    //   } else {
-    //     console.log('(no tool calls)')
-    //   }
-
-    //   resolve()
-    // })
+      resolve()
+    })
 
     reader.on('error', (error: Error) => {
       console.error('Stream error:', error)
