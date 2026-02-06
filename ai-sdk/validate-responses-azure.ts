@@ -79,7 +79,7 @@ const startTime = Date.now()
 
 generateText({
   model,
-  prompt: 'Say "Azure validation successful" in exactly 4 words.',
+  prompt: 'Hello, who are you?',
   maxOutputTokens: 50,
 })
   .then((result) => {
